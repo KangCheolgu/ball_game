@@ -28,7 +28,15 @@ export default {
     server:
     {
         host: true, // Open to local network and display URL
-        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env) // Open if it's not a CodeSandbox
+        // open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env), // Open if it's not a CodeSandbox
+        port: 3001,
+        proxy: {
+            // 웹소켓 또는 socket.io 프락시: ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
+            '/socket.io': {
+              target: 'ws://localhost:5173',
+              ws: true
+            }
+          }
     },
     build:
     {
